@@ -1,6 +1,26 @@
 {
-  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
-  "extends": [
-    "config:recommended"
+  "extends": ["config:base"],
+  "regexManagers": [
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ENV\\s+GIT_VERSION=(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)"],
+      "datasourceTemplate": "github-tags",
+      "packageNameTemplate": "git/git",
+      "depNameTemplate": "git"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ENV\\s+TAR_VERSION=(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)"],
+      "datasourceTemplate": "github-tags",
+      "packageNameTemplate": "Distrotech/tar",
+      "depNameTemplate": "tar"
+    },
+    {
+      "fileMatch": ["^Dockerfile$"],
+      "matchStrings": ["ENV\\s+GZIP_VERSION=(?<currentValue>\\d+\\.\\d+(\\.\\d+)?)"],
+      "datasourceTemplate": "github-tags",
+      "packageNameTemplate": "madler/gzip",
+      "depNameTemplate": "gzip"
+    }
   ]
 }
